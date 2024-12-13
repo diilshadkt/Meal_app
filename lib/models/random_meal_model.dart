@@ -16,6 +16,7 @@ class Welcome with _$Welcome {
 @freezed
 class Meal with _$Meal {
   const factory Meal({
+    // ignore: invalid_annotation_target
     @JsonKey(name: "strMeal") required String strMeal,
     // ignore: invalid_annotation_target
     @JsonKey(name: "strCategory") required String strCategory,
