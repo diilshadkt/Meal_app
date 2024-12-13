@@ -11,16 +11,16 @@ class HomePage extends ConsumerWidget {
     AsyncValue<Meal> randomMealProvider = ref.watch(fetchRandomMealProvider);
     return Scaffold(
       backgroundColor: Colors.amber,
-      body: randomMealProvider.when(
+      body: RefreshIndicator(
+        onRefresh: () => ref.refresh(fetchRandomMealProvider.future),
+        child: randomMealProvider.when(
           data: (data) {
             return Center(
-              child: Column(
-                children: [
-                  Text(data.strMeal),
-                  Text(data.strCategory),
-                  Text(data.strArea),
-                ],
-              ),
+              child: ListView(children: [
+                Text(data.strMeal),
+                Text(data.strCategory),
+                Text(data.strArea),
+              ]),
             );
           },
           error: (error, stackTrace) {
@@ -28,7 +28,11 @@ class HomePage extends ConsumerWidget {
               child: Text(error.toString()),
             );
           },
-          loading:() => Center(child: CircularProgressIndicator(),),),
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ),
     );
   }
 }
