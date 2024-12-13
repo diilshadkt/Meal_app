@@ -18,6 +18,7 @@ class Meal with _$Meal {
   const factory Meal({
     @JsonKey(name: "strMeal") required String strMeal,
     @JsonKey(name: "strCategory") required String strCategory,
+    // ignore: invalid_annotation_target
     @JsonKey(name: "strArea") required String strArea,
   }) = _Meal;
 
